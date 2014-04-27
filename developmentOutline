@@ -1,0 +1,125 @@
+Outline by Jonathan Baldwin!
+Here's a breakdown of the tech needed for each section:!
+!
+Front end: !
+Tweet deck and created/submitted ﬂyer display feed--> organized and displayed similar 
+to Google notes!
+>> A quick way to do this is to use jQuery to query your database for a JSON list of 
+ﬂyers and tweets, sorted by date. You should construct your JSON objects (an object in 
+this case being a ﬂyer or tweet) as an ordered array like this:!
+!
+serverResponse = !
+     { "items" : !
+          [ {  "created" : "1310669017000",!
+								"type":"flyer",!
+								"category":"news",!
+								"content":	"/img/imageurl",!
+								"author"	:	"Jane	Doe",!
+								"text":	"Lorem	Ipsum	dolor	simit	cogito	ergo"!
+								"curated":	1!
+						},!
+						{	"created"	:	"1310669016999",!
+								"type"	:	"tweet",!
+								"tweetURL"	:	"https://twitter.com/RedHookWiFi/
+status/452081985494994944",!
+								"author"	:	"RedHookWiFi",!
+								"text"	:	"@BrooklynCB6	Will	the	improvements	include	
+reopening	the	park	house?	Its	been	closed	since	Sandy.",!
+								"curated"	:	0!
+						},!
+						{!
+									another	object...!
+						}!
+          ]!
+     }!
+!
+!
+Now that you have your JSON object from the server, run a jQuery.each() loop over the 
+array and print out the data objects as responsive CSS boxes (aka Google Note style) 
+using Twitter Bootstrap CSS for responsive media queries (size of the browser window 
+dictates how many boxes/columns across the browser will show). !
+!You can create a logic within the jQuery.each() loop to display tweets differently (i.e. 
+larger text) from ﬂyers (using the "type" value for each object) and choose whether to 
+push it to the top of the screen using the "curated" value boolean (0 or 1).!
+!
+I'm not sure if you'll be rendering the ﬂyers in this layout as text & images or using static 
+pictures of each ﬂyer instead...!
+!
+Flyer submittal template/ﬁelds!
+>> Create a form using Bootstrap and jQuery, asking questions, storing the user's 
+response in a new JSON object, and then use jQuery + CSS to turn the users 
+responses into a pre-laid out ﬂyer. Construct HTML/CSS ﬂyer templates ahead of time, 
+and then use jQuery $("#textarea").text("USER INPUTTED TEXT") or $
+("#imgarea").attr("src", "img/ﬂyerimage.png"); to add text or images to the ﬂyer 
+template. !
+!
+For images, you also need to create a upload image button and store the uploaded 
+images in a folder on your server. !
+!
+For specifying a ﬂyer category, use a dropdown box or other selector and then store the 
+user's choice as part of the new JSON object.!
+!
+Now, store the entire template as a PDF using jsPDF, or just store the JSON object of 
+user responses used to populate the ﬂyer template (by store, I mean send to database). 
+You can also let the user print the ﬂyer by using CSS to signify the area of the ﬂyer 
+template on the page to print, i.e.:!
+!
+@media	print	{	
+		body	*	{	
+				visibility:	hidden;	
+		}	
+		#section-to-print,	#section-to-print	*	{	
+				visibility:	visible;	
+		}	
+		#section-to-print	{	
+				position:	absolute;	
+				left:	0;	
+				top:	0;	
+		}	
+}	
+!
+ !
+Rss sign up!
+!This would be a button that goes to a URL on the website like site.com/feed that queries 
+the database and outputs the JSON objects as XML. I'm not sure who uses RSS, but I 
+would think about support for raw JSON output as well as XML, since that is more 
+popular these days. More on RSS below.!
+!
+Back end:!
+!
+Need a web host to host the website. I use Digital Ocean, using Ubuntu Linux as the 
+server OS. Then, setup nginx (or apache, or node) to server as HTTP server for the 
+main webpages (ﬂyer/twitter feed, ﬂyer creation, etc.).!
+!
+You also need to setup a database. I use MongoDB, since it stores everything as JSON 
+objects and is easier to work with than SQL styles for data feeds (usually). This all 
+depends on the developer and their preference. In the end, it doesn't matter how the 
+data is store as long as you can do queries. !
+!
+You also need a server-side language to make queries to the database and send them 
+to the front-end user. There are many choices here. I use Node.js, as it is javascript 
+based so it easily handles JSON from MongoDB. There are other languages, such as 
+PHP, Ruby, Python, etc. that a developer might prefer. !
+!
+You can also use Node.js to pull in live tweets from twitter (and instagram) by using the 
+streaming twitter API. You can install it as a package in node using https://
+www.npmjs.org/package/twitter then specify the hashtags you want to track.  It will run 
+in the background and every time someone tweets using the hashtag(s) you can store it 
+in MongoDB. !
+!
+Ofﬁcial RSS feed!
+!
+As stated above in the "Rss sign up", this is just a query for the latest objects in the 
+MongoDB database. The user sends a request using jQuery to Node.js on the backend, 
+then node queries mongoDB, then node converts the JSON into XML and sends it back 
+to the user's browser where it is printed as text. If someone subscribes to the RSS, their 
+RSS reader will "query the database" for them, as long as it points to site.com/feed!
+!
+Flyer creation, categorize,  print, send to database!
+Database, with categories!
+!
+As detailed in the JSON object construction above, there's a key called "category" that 
+speciﬁes the area which the user selects when creating the ﬂyer. You can ﬁlter out 
+which ﬂyers are shown in the front-end ﬂyer feed by using jQuery to send a special 
+query to the Node.js server that says i.e. {"category":"news"} so then Node.js will query 
+MongoDB for all ﬂyers that contain the category "news." !
