@@ -1,0 +1,92 @@
+html{
+	
+	background-color: #3399FF；
+}
+
+body {
+
+	height: 100%;
+	width: 100%;
+}
+#top_hat{
+	height: 10%;
+	width: 60%;
+	margin-left: 20%;
+	background-color: green;
+	text-align: center;
+	margin-bottom: -21px;
+}
+
+#top_hat h1{
+	
+	height: 17px;
+}
+
+#bottom_hat{
+	height: 8%;
+	width: 73%;
+	margin-left: 14%;
+	background-color: blue;
+	border-bottom-color: black;
+	text-align: center;
+
+}
+
+#bottom_hat h1{
+	
+	height: 24px;
+	padding-top: 3px
+}
+
+#face{
+	
+	height:500px;
+	width: 58%;
+	margin-left:331px;
+	background-color: yellow;
+}
+
+.eye{
+	background-color: black;
+	
+}
+
+#left_eye{
+	position: fixed;
+	top: 221px;
+	left: 461px;	
+	margin-left: 30px;
+	height: 60px;
+	width: 50px;
+}
+
+#right_eye{
+	position: fixed;
+	top: 221px;
+	left: 1001px;	
+	margin-left: 30px;
+	height: 60px;
+	width: 50px;
+}
+
+#nose{
+	height: auto;
+	width:auto;
+	border-bottom-color: black;
+	position: fixed;
+	top: 321px;
+	left: 725px;
+}
+
+#mouth{
+	height: auto;
+	width: 50%;
+	background-color: red;
+}
+
+.mouth{
+	
+	position: fixed;
+	top: 360px;
+	left: 397px;
+}

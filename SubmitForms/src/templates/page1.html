@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>page1</title>
+		<meta name="description" content="" />
+		<meta name="author" content="RS011874" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="static/css/page1.css" type="text/css">
+        <script type="text/javascript" src="/static/js/underscore.js"></script>
+        <script type="text/javascript" src="/static/js/main.js"></script>
+        <script type="text/javascript" src="/static/js/form.js"></script>
+	</head>
+
+	<body>
+		 <div id="top_hat">
+			<h1><strong>The</strong></h1>
+		</div>
+		<div id="bottom_hat">
+		
+			<h1><strong>Hub</strong></h1>
+
+		</div>
+		
+		<div id="face">
+			
+			<div id="left_eye" class="eye">
+			</div>
+			
+			<div id="right_eye" class="eye">
+			</div>
+			
+			<div id="nose">
+				<select
+					onchange="Forms.Selector(this);">
+  					<option value="-1">Choose a Form Type</option>
+  					<option value="1">Jobs</option>
+  					<option value="2">Events</option>
+  					<option value="3">Emergency</option>
+  					<option value="4">Information</option>
+				</select>
+			</div>
+			
+			<div id="mouth" class="mouth">
+			</div>
+		</div>
+		
+		<!--Templates-->
+		<script type="text/template" id="job_form">
+		
+			<form>
+				<table>
+					<tr>
+						<td>
+							Title:
+						</td>
+						<td>
+							<input type="text" name="title" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Company:
+						</td>
+						<td>
+							<input type="text" name="company" required>
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							Description:
+						</td>
+						<td>
+							<input type="text" name="description" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Category:
+						</td>
+						<td>
+							<input type="text" name="category" required>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							Start Date:
+						</td>
+						<td>
+							<input type="text" name="start_date" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input onclick='Forms.Send()' type="button" value="submit">
+						</td>
+						<td>
+							<button type="button" onclick='Forms.Cancel()'>Cancel</button>
+						</td>
+					</tr>
+				</table>
+			<form>
+		
+		</script>
+		
+		<script type="text/template" id="info_form">
+		
+			<form>
+				<table>
+					<tr>
+						<td>
+							Title:
+						</td>
+						<td>
+							<input type="text" name="title" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Description:
+						</td>
+						<td>
+							<input type="text" name="description" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Category:
+						</td>
+						<td>
+							<input type="text" name="category" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick= 'Forms.Send()'>Submit</button>
+						</td>
+						<td>
+							<button type="button" onclick="Forms.Cancel()">Cancel</button>
+						</td>
+					</tr>
+				</table>
+		
+		</script>
+		
+		<script type="text/template" id="events_form">
+		
+			<form>
+				<table>
+					<tr>
+						<td>
+							Title:
+						</td>
+						<td>
+							<input type="text" name="title" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Description:
+						</td>
+						<td>
+							<input type="text" name="description" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Category:
+						</td>
+						<td>
+							<select>
+								<option value="Art">Art</option>
+			  					<option value="music">Music</option>
+  								<option value="sale">Sale</option>
+  								<option value="class">Class</option>
+  								<option value="party">party</option>
+			  					<option value="meeting">Meeting</option>
+  								<option value="Other">Other</option>
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							Start Date:
+						</td>
+						<td>
+							<input type="text" name="start_date" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Audience:
+						</td>
+						<td>
+							<input type="text" name="audience" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Location:
+						</td>
+						<td>
+							<input type="text" name="location" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick= "Forms.Send()">Submit</button>
+						</td>
+						<td>
+							<button type="button" onclick="Forms.Cancel()">Cancel</button>
+						</td>
+					</tr>
+				</table>
+		</script>
+		
+		<script type="text/template" id="emergency_form">
+		
+			<form>
+				<table>
+					<tr>
+						<td>
+							Title:
+						</td>
+						<td>
+							<input type="text" name="title" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Description:
+						</td>
+						<td>
+							<input type="text" name="description" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							number:
+						</td>
+						<td>
+							<input type="text" name="number" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Location:
+						</td>
+						<td>
+							<input type="text" name="location" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button onclick='Forms.Send()'>Submit</button>
+						</td>
+						<td>
+							<button type="button" onclick="Forms.Cancel()">Cancel</button>
+						</td>
+					</tr>
+				</table>
+		<script>
+	</body>
+</html>
